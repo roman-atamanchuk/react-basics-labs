@@ -35,6 +35,11 @@ function App() {
     setTaskState({ tasks });
     console.log(`${taskIndex} ${tasks[taskIndex].done}`);
   };
+  const deleteHandler = (taskIndex) => {
+    const tasks = [...taskState.tasks];
+    tasks.splice(taskIndex, 1);
+    setTaskState({ tasks });
+  };
 
   return (
     <div className="container">
@@ -42,6 +47,7 @@ function App() {
 
       {taskState.tasks.map((task, index) => (
         <Task
+          deleteTask={() => deleteHandler(index)}
           key={task.id}
           title={task.title}
           deadline={task.deadline}
