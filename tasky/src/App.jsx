@@ -10,6 +10,7 @@ function App() {
         description: "Empty dishwasher",
         deadline: "Today",
         priority: "high",
+        done: false,
       },
       {
         id: 2,
@@ -17,10 +18,23 @@ function App() {
         description: "Fold clothes and put away",
         deadline: "Tomorrow",
         priority: "medium",
+        done: false,
       },
-      { id: 3, title: "Tidy up", deadline: "Today", priority: "low" },
+      {
+        id: 3,
+        title: "Tidy up",
+        deadline: "Today",
+        priority: "low",
+        done: false,
+      },
     ],
   });
+  const doneHandler = (taskIndex) => {
+    const tasks = [...taskState.tasks];
+    tasks[taskIndex].done = !tasks[taskIndex].done;
+    setTaskState({ tasks });
+    console.log(`${taskIndex} ${tasks[taskIndex].done}`);
+  };
 
   return (
     <div className="container">
@@ -33,6 +47,8 @@ function App() {
           deadline={task.deadline}
           description={task.description}
           priority={task.priority}
+          done={task.done}
+          markDone={() => doneHandler(index)}
         />
       ))}
     </div>
